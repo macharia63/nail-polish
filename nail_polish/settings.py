@@ -26,7 +26,7 @@ SECRET_KEY = 'c$i8#=!xcao-t*t01#e5&9bx*2^%a+6e%h1hf3*_!4rk!7-4vh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['nail-polish.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'nail_polish.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
+  DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.sqlite3',
        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
