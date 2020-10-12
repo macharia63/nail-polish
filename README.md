@@ -100,9 +100,9 @@ My Project is about an online nail polish store where the users are able to purc
   - disabled Django’s static file handling and allow WhiteNoise to take over simply by passing the --nostatic option to the runserver command
      - 'whitenoise.runserver_nostatic',
    - Type commands as below for git add / commit / git push
-   - git add
-   - git commit -m "commit message" 
-   - git push
+    - git add
+    - git commit -m "commit message" 
+    - git push
   - Type commands as below for git remote
   1. git remote add heroku
   2. git push -u heroku main
