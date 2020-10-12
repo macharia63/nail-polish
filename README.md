@@ -85,24 +85,20 @@ My Project is about an online nail polish store where the users are able to purc
    3. Login Heroku
    4.Setting Config Vars: Heroku homepage - Select "nail-polish" project - Setting - Click "Reveal Config Vars" - Create Config Vars and save
    - Then install whitenoise using 
-      pip3 install whitenoise
+      - pip3 install whitenoise
    - I made sure staticfiles are configured correctly
-      STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+      - STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
    - I made sure I was using the static template tag to refer to your static files, rather that writing the URL directly
-      {% load static %}
+      - {% load static %}
    - I placed WhiteNoise middleware directly after the Django security middleware
-                MIDDLEWARE = [
-  'django.middleware.security.SecurityMiddleware',
-  'whitenoise.middleware.WhiteNoiseMiddleware',
-  # ...
-  ]
+      - 'whitenoise.middleware.WhiteNoiseMiddleware',
   - Added compression and caching support in setting.py
-     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+     - STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
   - Used a Content-Delivery Network
-     STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
-     STATIC_URL = STATIC_HOST + '/static/'
+     - STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
+     - STATIC_URL = STATIC_HOST + '/static/'
   - disabled Django’s static file handling and allow WhiteNoise to take over simply by passing the --nostatic option to the runserver command
-     'whitenoise.runserver_nostatic',
+     - 'whitenoise.runserver_nostatic',
    - Type commands as below for git add / commit / git push
    - git add
    - git commit -m "commit message" 
