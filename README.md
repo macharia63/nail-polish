@@ -70,6 +70,8 @@ My Project is about an online nail polish store where the users are able to purc
    - Click on pay button and see if it will direct you to paypal buttons.
    ##### Mobile responsive
    - Each page was checked through the live preview by inspecting it in dev tools and choosing different screen sizes.
+   ## Bugs/Problem Encountered
+   - I was having problem deploying my project to heroku and installation of whitenoise.
    ##### Deploying my project
    - I used Gitpod workspace and added content with the following commands to push to GitHub;
    1. Git add "file name".
@@ -81,33 +83,39 @@ My Project is about an online nail polish store where the users are able to purc
    2. Create "Procfile" file
       web: gunicorn..
    3. Login Heroku
-   4.Setting Config Vars: Heroku homepage - Select "Nailpolish" project - Setting - Click "Reveal Config Vars" - Create Config Vars and save
-   - AWS_ACCESS_KEYID, AWS_SECRET_ACCESS_KEY: You can get a csv file, which includes the key information when you create staticfiles-user. Find the keys and copy and paste them on the fields.
-   - DATABASE_URL
-   - The value will be created when you create a new Postgres database.
-   - EMAIL_HOST_PASS
-   - You can get the value in the app password generator in Gmail. The value is 16 character.
-   - EMAIL_HOST_USER
-   - Your gmail address
-   - SECRET_KEY
-   - Go to https://miniwebtool.com/django-secret-key-generator/ and click "Generate Django Secret Key".
-   - The generated Django Secret Key length is 50 characters. Use this value.
-   - STRIPE_PUBLIC_KEY
-   - Go to Stripe.com and login -> Dashboard -> Developers -> API Keys -> Copy "Publishable key"
-   - STRIPE_SECRET_KEY
-   - Go to Stripe.com and login -> Dashboard -> Developers -> API Keys -> Copy "Secret key"
-   - STRIPE_WH_SECRET
-   - Go to Stripe.com and login -> Dashboard -> Developers -> Webhook -> Click URL -> Copy "Signing secret"
+   4.Setting Config Vars: Heroku homepage - Select "nail-polish" project - Setting - Click "Reveal Config Vars" - Create Config Vars and save
+   - Then install whitenoise using 
+      pip3 install whitenoise
+   - I made sure staticfiles are configured correctly
+      STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+   - I made sure I was using the static template tag to refer to your static files, rather that writing the URL directly
+      {% load static %}
+   - I placed WhiteNoise middleware directly after the Django security middleware
+                MIDDLEWARE = [
+  'django.middleware.security.SecurityMiddleware',
+  'whitenoise.middleware.WhiteNoiseMiddleware',
+  # ...
+  ]
+  - Added compression and caching support in setting.py
+     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+  - Used a Content-Delivery Network
+     STATIC_HOST = os.environ.get('DJANGO_STATIC_HOST', '')
+     STATIC_URL = STATIC_HOST + '/static/'
+  - disabled Django’s static file handling and allow WhiteNoise to take over simply by passing the --nostatic option to the runserver command
+     'whitenoise.runserver_nostatic',
    - Type commands as below for git add / commit / git push
    - git add
    - git commit -m "commit message" 
    - git push
   - Type commands as below for git remote
   1. git remote add heroku
-  2. git push -u heroku master
+  2. git push -u heroku main
   3. git remote -v
   4. Run the webpage
   ## Credits
+  - Code Institute tutor team for their help throughout the project.
+  - Igor Code Institute tutor for his help with heroku.
+  - Telusko and Freak on youtube tutorials.
   ###### Photos
   - The photo were obtained from [https://www.pexels.com](https://www.pexels.com).
   - Telusko and Freak on youtube tutorials.
