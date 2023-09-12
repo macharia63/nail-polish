@@ -1,6 +1,6 @@
 # nail-polish
 My Project is about an online nail polish store where the users are able to purchase products and their products are delivered for free.
-   The application is live here [https://nail-polish.herokuapp.com/](https://nail-polish.herokuapp.com/).
+   
    ## UX
    This project is for all people who would wish to buy nail polish online.
    - As a user I would like to have a navigation bar where i can navigate though the website.
